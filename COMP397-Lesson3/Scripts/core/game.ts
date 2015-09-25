@@ -7,7 +7,7 @@
 /// <reference path="../typings/preloadjs/preloadjs.d.ts" />
 
 /// <reference path="../objects/label.ts" />
-
+/// <reference path="../objects/button.ts" />
 
 
 // GLOBAL GAME FRAMEWORK VARIABLES
@@ -17,7 +17,7 @@ var stats: Stats;
 
 // Game Variables
 var helloLabel: objects.Label;
-var startButton: createjs.Bitmap;
+var startButton: objects.Button;
 
 function init():void {
     canvas = document.getElementById("canvas"); // reference to canvas element
@@ -55,26 +55,18 @@ function clickStartButton(event: createjs.MouseEvent): void {
     helloLabel.text = "Clicked";
 }
 
-// Event Handler for mouse over
-function overStartButton(event: createjs.MouseEvent): void {
-    startButton.alpha = 0.7;
-}
-
-// Event Handler for mouse out
-function outStartButton(event: createjs.MouseEvent): void {
-    startButton.alpha = 1.0;
-}
-
 
 // This is where all the fun happens
 function main(): void {
+    // hello label
     helloLabel = new objects.Label("Game Start", "60px Consolas", "#000000", 320, 240);
     stage.addChild(helloLabel); // add label to the stage
 
-    startButton = new createjs.Bitmap("../../Assets/images/StartButton.png");
+    // start button
+    startButton = new objects.Button("StartButton", 320, 340);
     startButton.on("click", clickStartButton, this);
-    startButton.on("mouseover", overStartButton, this);
-    startButton.on("mouseout", outStartButton, this);
+
+
     stage.addChild(startButton);
 
 
