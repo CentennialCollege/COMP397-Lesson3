@@ -59,6 +59,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\images\BackButton.png" />
+    <Content Include="Assets\images\NextButton.png" />
+    <Content Include="Assets\images\StartButton.png" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -88,7 +91,6 @@
   <ItemGroup>
     <Folder Include="Assets\audio\" />
     <Folder Include="Assets\fonts\" />
-    <Folder Include="Assets\images\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\core\game.ts" />
