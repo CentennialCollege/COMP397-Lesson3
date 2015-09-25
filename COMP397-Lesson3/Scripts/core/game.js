@@ -1,3 +1,4 @@
+/// <reference path="../config/config.ts" />
 /// <reference path="../typings/jquery/jquery.d.ts" />
 /// <reference path="../typings/stats/stats.d.ts" />
 /// <reference path="../typings/createjs-lib/createjs-lib.d.ts" />
@@ -7,10 +8,14 @@
 /// <reference path="../typings/preloadjs/preloadjs.d.ts" />
 /// <reference path="../objects/label.ts" />
 /// <reference path="../objects/button.ts" />
+/// <reference path="../states/menu.ts" />
 // GLOBAL GAME FRAMEWORK VARIABLES
 var canvas;
 var stage;
 var stats;
+var state;
+var scene;
+var stateFunction; // alias for our current state
 // Game Variables
 var helloLabel;
 var startButton;
@@ -21,7 +26,8 @@ function init() {
     createjs.Ticker.setFPS(60); // set frame rate to 60 fps
     createjs.Ticker.on("tick", gameLoop); // update gameLoop every frame
     setupStats(); // sets up our stats counting
-    main(); // call main game function
+    state = config.MENU_STATE;
+    changeState();
 }
 // Main Game Loop
 function gameLoop(event) {
@@ -42,14 +48,21 @@ function setupStats() {
 function clickStartButton(event) {
     helloLabel.text = "Clicked";
 }
-// This is where all the fun happens
-function main() {
-    // hello label
-    helloLabel = new objects.Label("Game Start", "60px Consolas", "#000000", 320, 240);
-    stage.addChild(helloLabel); // add label to the stage
-    // start button
-    startButton = new objects.Button("StartButton", 320, 340);
-    startButton.on("click", clickStartButton, this);
-    stage.addChild(startButton);
+// state machine prep
+function changeState() {
+    // Launch various scenes
+    switch (state) {
+        case config.MENU_STATE:
+            // show the menu scene
+            stateFunction = states.menu;
+            break;
+        case config.PLAY_STATE:
+            // show the play scene
+            break;
+        case config.OVER_STATE:
+            // show the game over scene
+            break;
+    }
+    stateFunction();
 }
 //# sourceMappingURL=game.js.map
